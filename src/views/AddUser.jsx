@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const AddUser = () => {
+    const navigate = useNavigate()
     const [userData, setUserData] = useState({
         firstName: "",
         lastName: "",
@@ -24,6 +25,7 @@ const AddUser = () => {
         try {
             const response = await axios.post('http://localhost:8080/user', userData);
             console.log('Data sent successfully:', response.data);
+            navigate(-1)
         } catch (error) {
             console.error('Error sending data:', error);
         }

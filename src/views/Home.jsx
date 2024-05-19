@@ -33,16 +33,17 @@ const Home = () => {
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                             <div class="ms-2 me-auto">
                                 <div class="fw-bold">{`Usuario: ${user.firstName}`}</div>
-                                {`email: ${user.firstName}`}
+                                {`email: ${user.email}`}
                             </div>
-                            <span class="badge text-bg-primary rounded-pill">{`Id: ${user.id}`}</span>
+                            <Link className="btn btn-outline-success me-2" state={{userId: user.id}} to="/balance">Ver balance</Link>                
+                            <Link className="btn btn-outline-warning" to="/add_user">Editar</Link>  
                         </li>
                     ))}
                 </ol>
             </div>
 
-            <div className="row justify-content-md-end mt-3">
-                <div className="col-3">
+            <div className="row justify-content-md-end mt-4">
+                <div className="col-2">
                     <Link className="btn btn-outline-info" to="/add_user">Agrega un nuevo usuario</Link>
                 </div>
             </div>
