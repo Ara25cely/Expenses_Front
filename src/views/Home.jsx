@@ -18,9 +18,6 @@ const Home = () => {
         fetchData();
     }, []);
 
-    console.info("data", users)
-    if (users.length === 0) return null
-
     return (
         <div className="container text-center">
             <div className="row mt-4">
@@ -36,7 +33,6 @@ const Home = () => {
                                 {`email: ${user.email}`}
                             </div>
                             <Link className="btn btn-outline-success me-2" state={{userId: user.id}} to="/balance">Ver balance</Link>                
-                            <Link className="btn btn-outline-warning" to="/add_user">Editar</Link>  
                         </li>
                     ))}
                 </ol>

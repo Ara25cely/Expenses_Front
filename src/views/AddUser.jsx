@@ -3,6 +3,9 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const AddUser = () => {
+    const location = useLocation();
+    const { shouldGoForward = false } = location.state || {}
+
     const navigate = useNavigate()
     const [userData, setUserData] = useState({
         firstName: "",
@@ -23,9 +26,14 @@ const AddUser = () => {
         console.log('forms:', userData)
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8080/user', userData);
+            const response = await axios.post('http://localhost:8080/user/signup', userData);
             console.log('Data sent successfully:', response.data);
-            navigate(-1)
+            if(shouldGoForward) {
+                navigate("/")
+            } else {
+                navigate(-1)
+            }
+            
         } catch (error) {
             console.error('Error sending data:', error);
         }
@@ -46,7 +54,7 @@ const AddUser = () => {
                         <label for="lastname" className="form-label">Apellido</label>
                         <input name="lastName" type="text" value={userData.lastName} onChange={onChangeValue} className="form-control" id="lastname" />
                     </div>
-                    <div classname="mb-3">
+                    <div className="mb-3">
                         <label for="email" className="form-label">Correo</label>
                         <input name="email" type="email" value={userData.email} onChange={onChangeValue} className="form-control" id="email" />
                     </div>
